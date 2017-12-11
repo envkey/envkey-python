@@ -11,7 +11,6 @@ setup(name="envkey",
       packages=["envkey"],
       package_data={"envkey": ["ext/**/*"]},
       install_requires=["python-dotenv>=0.7.1"],
-      download_url = 'https://github.com/envkey/envkey-python/archive/1.0.0.tar.gz',
       classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
