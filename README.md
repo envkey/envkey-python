@@ -30,7 +30,7 @@ The package will throw an error if an `ENVKEY` is missing or invalid.
 
 ### Example
 
-Assume you have `STRIPE_SECRET_KEY` set to `sk_test_2a33b045e998d2ef60c7861d2ac22ea8` for the `development` environment in the EnvKey App. You generate a local development `ENVKEY`.
+Assume you have `STRIPE_SECRET_KEY` set for the `development` environment in the EnvKey App. You generate a local development `ENVKEY`.
 
 In your project's **gitignored** `.env` file:
 
@@ -42,7 +42,7 @@ ENVKEY=GsL8zC74DWchdpvssa9z-nk7humd7hJmAqNoA
 In `app.py`:
 
 ```python
-stripe.api_key = os.environ.get('STRIPE_SECRET_KEY')
+stripe.api_key = os.environ['STRIPE_SECRET_KEY']
 ```
 
 Now `STRIPE_SECRET_KEY` will stay automatically in sync for all the developers on your team.
