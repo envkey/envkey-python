@@ -1,4 +1,5 @@
-from setuptools import setup
+from distutils.core import setup
+# from setuptools import setup
 
 setup(name="envkey",
       version="1.0.0",
@@ -12,4 +13,14 @@ setup(name="envkey",
       package_data={"envkey": ["ext/**/*"]},
       install_requires=["python-dotenv>=0.7.1"],
       download_url = 'https://github.com/envkey/envkey-python/archive/1.0.0.tar.gz',
+      classifiers=[
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "Intended Audience :: System Administrators",
+        "License :: OSI Approved :: MIT License",
+        "Programming Language :: Python :: 2",
+        "Programming Language :: Python :: 3",
+        "Topic :: Security",
+        "Topic :: Security :: Cryptography",
+      ],
       zip_safe=False)
