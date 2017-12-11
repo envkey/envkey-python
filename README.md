@@ -1,6 +1,8 @@
 # envkey-python
 
-Integrate [EnvKey](https://www.envkey.com) with your Python projects to keep API keys, credentials, and other configuration securely and automatically in sync for developers and servers.
+Integrate [EnvKey](https://www.envkey.com) with your Python projects to keep API keys, credentials, and other configuration securely and automatically in sync for developers and servers. 
+
+Compatible with Python 2 and 3. 
 
 ## Installation
 
