@@ -1,4 +1,3 @@
-from pkg_resources import resource_filename, Requirement
 import sys
 import platform
 import subprocess
@@ -6,7 +5,7 @@ import os.path
 from .constants import ENVKEY_FETCH_VERSION
 
 def __lib_extension():
-  return ".exe" if sys.platform == "win32" else ""
+  return ".exe" if platform.system() == "Windows" else ""
 
 def __lib_file_name():
   return "envkey-fetch" + __lib_extension()
@@ -31,8 +30,8 @@ def __lib_dir():
   return "_".join(("envkey-fetch", ENVKEY_FETCH_VERSION, __lib_platform_part(), __lib_arch_part()))
 
 def __lib_path():
-  path = "/".join(("ext", __lib_dir(), __lib_file_name()))
-  return resource_filename(Requirement.parse("envkey"), path)
+  root = os.path.abspath(os.path.dirname(__file__))
+  return os.path.join(root, 'ext',__lib_dir(), __lib_file_name())
 
 def fetch_env(key, is_dev=False):
   path = __lib_path()
