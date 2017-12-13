@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name="envkey",
-      version="1.0.0",
+      version="1.0.1",
       description="EnvKey's python library. Protect API keys and credentials. Keep configuration in sync.",
       url="https://github.com/envkey/envkey-python",
       keywords=["security", "secrets management", "configuration management", "environment variables", "configuration", "python"],
@@ -9,7 +9,8 @@ setup(name="envkey",
       author_email="support@nvkey.com",
       license="MIT",
       packages=["envkey"],
-      package_data={"envkey": ["ext/**/*"]},
+      package_data={"envkey": ["ext/?/*"]},
+      include_package_data=True,
       install_requires=["python-dotenv>=0.7.1"],
       classifiers=[
         "Development Status :: 5 - Production/Stable",

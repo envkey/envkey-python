@@ -1,16 +1,16 @@
 import os
 import json
-from dotenv import load_dotenv, find_dotenv
+from dotenv import load_dotenv
 from .fetch import fetch_env
 
 def load():
-  dot_env_res = load_dotenv(find_dotenv())
+  dot_env_res = load_dotenv(os.path.join(os.getcwd(), ".env"))
   key = os.environ.get("ENVKEY")
 
   if key == None:
     raise ValueError("ENVKEY missing - must be set as an environment variable or in a gitignored .env file in the root of your project. Go to https://www.envkey.com if you don't know what an ENVKEY is.")
 
-  fetch_res = fetch_env(key, is_dev=(dot_env_res != None))
+  fetch_res = fetch_env(key, is_dev=(dot_env_res == True))
 
   if fetch_res.startswith("error: "):
     raise ValueError("ENVKEY invalid. Couldn't load vars.")
