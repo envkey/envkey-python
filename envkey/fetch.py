@@ -2,6 +2,7 @@ import sys
 import platform
 import subprocess
 import os.path
+import pkg_resources
 from .constants import ENVKEY_FETCH_VERSION
 
 def __lib_extension():
@@ -35,7 +36,7 @@ def __lib_path():
 
 def fetch_env(key, is_dev=False):
   path = __lib_path()
-  args = [path, key]
+  args = [path, key, "--client-name", "envkey-python", "--client-version", pkg_resources.get_distribution("envkey").version]
   if is_dev:
     args.append("--cache")
 

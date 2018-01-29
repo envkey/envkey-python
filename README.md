@@ -1,8 +1,8 @@
 # envkey-python
 
-Integrate [EnvKey](https://www.envkey.com) with your Python projects to keep API keys, credentials, and other configuration securely and automatically in sync for developers and servers. 
+Integrate [EnvKey](https://www.envkey.com) with your Python projects to keep API keys, credentials, and other configuration securely and automatically in sync for developers and servers.
 
-Compatible with Python 2 and 3. 
+Compatible with Python 2 and 3.
 
 ## Installation
 
@@ -53,7 +53,7 @@ Now your servers will stay in sync as well. If you need to rotate your `STRIPE_S
 
 ### Overriding Vars
 
-This package will not overwrite existing environment variables or additional variables set in a `.env` file. This can be convenient for customizing environments that otherwise share the same configuration. You can also use [sub-environments](https://blog.envkey.com/development-staging-production-and-beyond-85f26f65edd6) in the EnvKey app for this purpose.
+This package will not overwrite existing environment variables or additional variables set in a `.env` file. This can be convenient for customizing environments that otherwise share the same configuration. You can also use [sub-environments](https://blog.envkey.com/development-staging-production-and-beyond-85f26f65edd6) in the EnvKey App for this purpose.
 
 ### Working Offline
 
