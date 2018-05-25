@@ -3,6 +3,7 @@ import platform
 import subprocess
 import os.path
 import pkg_resources
+import json
 from .constants import ENVKEY_FETCH_VERSION
 
 def __lib_extension():
@@ -34,10 +35,15 @@ def __lib_path():
   root = os.path.abspath(os.path.dirname(__file__))
   return os.path.join(root, 'ext',__lib_dir(), __lib_file_name())
 
-def fetch_env(key, is_dev=False):
+def fetch_env(key, cache_enabled=False):
   path = __lib_path()
   args = [path, key, "--client-name", "envkey-python", "--client-version", pkg_resources.get_distribution("envkey").version]
-  if is_dev:
+  if cache_enabled:
     args.append("--cache")
 
-  return subprocess.check_output(args).decode().rstrip()
+  res = subprocess.check_output(args).decode().rstrip()
+
+  if res.startswith("error: "):
+    raise ValueError("ENVKEY invalid. Couldn't load vars.")
+
+  return json.loads(res)

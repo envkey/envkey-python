@@ -61,6 +61,27 @@ This package caches your encrypted config in development so that you can still u
 
 For caching purposes, it's assumed you're in development mode when a `.env` file exists in the root of your project.
 
+### Disabling autoload
+
+If you'd like to have more control over how your config is loaded, you can prevent the package from auto-loading on import by setting `ENVKEY_DISABLE_AUTOLOAD=1` either in your `.env` file or as an environment variable.
+
+You can then load your config explicitly like this:
+
+```python
+import envkey
+
+envkey.load(cache_enabled=True, dot_env_enabled=True, dot_env_path=".env")
+```
+
+For even more flexibility, you can just fetch your config as a dict (without setting it on `os.environ`) like this:
+
+```python
+import envkey
+import os
+
+config = envkey.fetch_env(os.environ['ENVKEY'], cache_enabled=True)
+```
+
 ## envkey-fetch binaries
 
 If you look in the `ext` directory of this package, you'll find a number of `envkey-fetch` binaries for various platforms and architectures. These are output by the [envkey-fetch Go library](https://github.com/envkey/envkey-fetch). It contains EnvKey's core cross-platform fetching, decryption, verification, web of trust, redundancy, and caching logic. It is completely open source.

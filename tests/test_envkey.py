@@ -14,24 +14,46 @@ os.environ["ENVKEY"] = VALID_ENVKEY
 import envkey
 
 def test_valid():
+  os.environ.clear()
   os.environ["ENVKEY"] = VALID_ENVKEY
   reload(envkey)
   assert(os.environ["TEST"] == "it")
   assert(os.environ["TEST_2"] == "works!")
 
 def test_no_overwrite():
+  os.environ.clear()
   os.environ["TEST"] = "otherthing"
+  os.environ["ENVKEY"] = VALID_ENVKEY
   reload(envkey)
   assert(os.environ["TEST"] == "otherthing")
   assert(os.environ["TEST_2"] == "works!")
 
 def test_invalid():
+  os.environ.clear()
   for key in INVALID_ENVKEYS:
     os.environ["ENVKEY"] = key
     with pytest.raises(ValueError):
       reload(envkey)
 
 def test_no_envkey():
-  del os.environ["ENVKEY"]
+  os.environ.clear()
   with pytest.raises(ValueError):
     reload(envkey)
+
+def test_autoload_disabled():
+  os.environ.clear()
+  os.environ["ENVKEY"] = VALID_ENVKEY
+
+  # ensure import doesn't autload when disabled via env var
+  os.environ["ENVKEY_DISABLE_AUTOLOAD"] = "1"
+
+  reload(envkey)
+  assert(os.environ.get("TEST") == None)
+
+  # test calling fetch directly
+  assert(envkey.fetch_env(VALID_ENVKEY)['TEST'] == "it")
+
+  # test calling load directly
+  envkey.load()
+  assert(os.environ["TEST"] == "it")
+  assert(os.environ["TEST_2"] == "works!")
