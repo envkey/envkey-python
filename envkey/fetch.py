@@ -1,3 +1,4 @@
+from __future__ import print_function
 import sys
 import platform
 import subprocess
@@ -41,7 +42,11 @@ def fetch_env(key, cache_enabled=False):
   if cache_enabled:
     args.append("--cache")
 
-  res = subprocess.check_output(args).decode().rstrip()
+  try:
+    res = subprocess.check_output(args).decode().rstrip()
+  except subprocess.CalledProcessError as err:
+    print("envkey-fetch " + err.output.decode(), file=sys.stderr)
+    raise ValueError("ENVKEY invalid. Couldn't load vars.")
 
   if res.startswith("error: "):
     raise ValueError("ENVKEY invalid. Couldn't load vars.")
