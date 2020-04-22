@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 from dotenv import load_dotenv, dotenv_values
 from .fetch import fetch_env
@@ -29,7 +30,15 @@ def load(is_init=False, cache_enabled=None, dot_env_enabled=True, dot_env_path="
   for k in fetch_res:
     if os.environ.get(k) == None:
       if k is not None and fetch_res[k] is not None:
-        os.environ[k] = fetch_res[k]
-        vars_set[k] = fetch_res[k]
+        key = to_env(k)
+        val = to_env(fetch_res[k])
+        os.environ[key] = val
+        vars_set[key] = val
 
   return vars_set
+
+def to_env(s):
+  if sys.version_info[0] == 2:
+      return s.encode(sys.getfilesystemencoding() or "utf-8")
+  else:
+      return s
