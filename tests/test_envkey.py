@@ -10,25 +10,25 @@ else:
     from importlib import reload # Python 3.5+
 
 VALID_ENVKEY = "wYv78UmHsfEu6jSqMZrU-3w1kwyF35nRYwsAJ-env-staging.envkey.com"
-INVALID_ENVKEYS = (
- "Emzt4BE7C23QtsC7gb1z-3NvfNiG1Boy6XH2oinvalid-env-staging.envkey.com",
- "Emzt4BE7C23QtsC7gb1zinvalid-3NvfNiG1Boy6XH2o-env-staging.envkey.com",
- "Emzt4BE7C23QtsC7gb1zinvalid-3NvfNiG1Boy6XH2o-localhost:387946",
- "invalid",
-)
+INVALID_ENVKEY = "invalid-wYv78UmHsfEu6jSqMZrU-3w1kwyF35nRYwsAJ-env-staging.envkey.com"
+
+def clear_env():
+  for k in ["ENVKEY", "TEST", "TEST_2", "ENVKEY_DISABLE_AUTOLOAD"]:
+    if k in os.environ:
+      del os.environ[k]
 
 os.environ["ENVKEY"] = VALID_ENVKEY
 import envkey
 
 def test_valid():
-  os.environ.clear()
+  clear_env()
   os.environ["ENVKEY"] = VALID_ENVKEY
   reload(envkey)
   assert(os.environ["TEST"] == "it")
   assert(os.environ["TEST_2"] == "works!")
 
 def test_no_overwrite():
-  os.environ.clear()
+  clear_env()
   os.environ["TEST"] = "otherthing"
   os.environ["ENVKEY"] = VALID_ENVKEY
   reload(envkey)
@@ -36,19 +36,18 @@ def test_no_overwrite():
   assert(os.environ["TEST_2"] == "works!")
 
 def test_invalid():
-  os.environ.clear()
-  for key in INVALID_ENVKEYS:
-    os.environ["ENVKEY"] = key
-    with pytest.raises(ValueError):
-      reload(envkey)
+  clear_env()
+  os.environ["ENVKEY"] = INVALID_ENVKEY
+  with pytest.raises(ValueError):
+    reload(envkey)
 
 def test_no_envkey():
-  os.environ.clear()
+  clear_env()
   with pytest.raises(ValueError):
     reload(envkey)
 
 def test_autoload_disabled():
-  os.environ.clear()
+  clear_env()
   os.environ["ENVKEY"] = VALID_ENVKEY
 
   # ensure import doesn't autload when disabled via env var
