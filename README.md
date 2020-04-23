@@ -24,6 +24,15 @@ Generate an `ENVKEY` in the [EnvKey App](https://github.com/envkey/envkey-app). 
 
 Now all your EnvKey variables will be available in `os.environ`.
 
+Or as a bit of syntactic sugar to avoid needing to always import `os` alongside `envkey`, you can call `envkey.get`, which delegates to `os.environ.get`. For example:
+
+```python
+import envkey
+
+my_var = envkey.get("SOME_ENVKEY_VAR")
+
+```
+
 ### Errors
 
 The package will throw an error if an `ENVKEY` is missing or invalid.
@@ -43,6 +52,12 @@ In `app.py`:
 
 ```python
 stripe.api_key = os.environ['STRIPE_SECRET_KEY']
+```
+
+Or using the `envkey.get` sugar:
+
+```python
+stripe.api_key = envkey.get('STRIPE_SECRET_KEY')
 ```
 
 Now `STRIPE_SECRET_KEY` will stay automatically in sync for all the developers on your team.
