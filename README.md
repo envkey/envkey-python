@@ -86,6 +86,13 @@ config = envkey.fetch_env(os.environ['ENVKEY'], cache_enabled=True)
 
 If you look in the `ext` directory of this package, you'll find a number of `envkey-fetch` binaries for various platforms and architectures. These are output by the [envkey-fetch Go library](https://github.com/envkey/envkey-fetch). It contains EnvKey's core cross-platform fetching, decryption, verification, web of trust, redundancy, and caching logic. It is completely open source.
 
+## x509 error / ca-certificates
+
+On a stripped down OS like Alpine Linux, you may get an `x509: certificate signed by unknown authority` error when this package attempts to load your config. [envkey-fetch](https://github.com/envkey/envkey-fetch) tries to handle this by including its own set of trusted CAs via [gocertifi](https://github.com/certifi/gocertifi), but if you're getting this error anyway, you can fix it by ensuring that the `ca-certificates` dependency is installed. On Alpine you'll want to run:
+```
+apk add --no-cache ca-certificates
+```
+
 ## Further Reading
 
 For more on EnvKey in general:
