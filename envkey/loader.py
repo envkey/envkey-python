@@ -30,10 +30,9 @@ def load(is_init=False, cache_enabled=None, dot_env_enabled=True, dot_env_path="
   for k in fetch_res:
     if os.environ.get(k) == None:
       if k is not None and fetch_res[k] is not None:
-        key = to_env(k)
         val = to_env(fetch_res[k])
-        os.environ[key] = val
-        vars_set[key] = val
+        os.environ[to_env(k)] = val
+        vars_set[to_env(k)] = val
 
   return vars_set
 

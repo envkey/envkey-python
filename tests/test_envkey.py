@@ -1,6 +1,13 @@
 import os
 import pytest
-from importlib import reload
+
+from sys import version_info
+if version_info[0] < 3:
+    pass # Python 2 has built in reload
+elif version_info[0] == 3 and version_info[1] <= 4:
+    from imp import reload # Python 3.0 - 3.4
+else:
+    from importlib import reload # Python 3.5+
 
 VALID_ENVKEY = "wYv78UmHsfEu6jSqMZrU-3w1kwyF35nRYwsAJ-env-staging.envkey.com"
 INVALID_ENVKEYS = (

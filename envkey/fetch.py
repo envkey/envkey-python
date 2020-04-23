@@ -43,9 +43,9 @@ def fetch_env(key, cache_enabled=False):
     args.append("--cache")
 
   try:
-    res = subprocess.check_output(args).decode().rstrip()
+    res = subprocess.check_output(args).decode(encoding="utf-8").rstrip()
   except subprocess.CalledProcessError as err:
-    print("envkey-fetch " + err.output.decode(), file=sys.stderr)
+    print("envkey-fetch " + err.output.decode(encoding="utf-8"), file=sys.stderr)
     raise ValueError("ENVKEY invalid. Couldn't load vars.")
 
   if res.startswith("error: "):
