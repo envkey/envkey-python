@@ -16,7 +16,7 @@ Then at the entry point of your application:
 import envkey
 ```
 
-For **Django**, you should put the above in `manage.py` and `wsgi.py`. Also see the note on casting below if you're migrating from `django-environ`.
+For **Django**, you should put the above in `manage.py` and `wsgi.py`. Also see the [note on casting below](#django-environ-casting) if you're migrating from `django-environ`.
 
 ## Usage
 
