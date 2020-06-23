@@ -16,7 +16,7 @@ Then at the entry point of your application:
 import envkey
 ```
 
-For **Django**, you should put the above in `manage.py` and `wsgi.py`.
+For **Django**, you should put the above in `manage.py` and `wsgi.py`. Also see the note on casting below if you're migrating from `django-environ`.
 
 ## Usage
 
@@ -96,6 +96,10 @@ import os
 
 config = envkey.fetch_env(os.environ['ENVKEY'], cache_enabled=True)
 ```
+
+### django-environ casting
+
+If you happen to be migrating from `django-environ` to EnvKey, watch out for the fact that EnvKey *does not* cast variables to booleans or any other non-string types as `django-environ` does. All variables set by EnvKey will be *strings* in accordance with the cross-platform environment variable standard. See: https://twitter.com/manishsinhaha/status/1265746057377361921
 
 ## envkey-fetch binaries
 
