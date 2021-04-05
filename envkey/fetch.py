@@ -14,8 +14,15 @@ def __lib_file_name():
   return "envkey-fetch" + __lib_extension()
 
 def __lib_arch_part():
+  if "arm64" in platform.platform():
+    return "arm64"
+
   is_64 = sys.maxsize > 2**32
-  return "amd64" if is_64 else "386"
+
+  if not is_64:
+    raise RuntimeError("As of 1.3.0, envkey-python only supports 64-bit systems. Please use an earlier version for 32-bit support.")
+
+  return "amd64"
 
 def __lib_platform_part():
   name = platform.system()
