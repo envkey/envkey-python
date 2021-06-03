@@ -14,7 +14,9 @@ def __lib_file_name():
   return "envkey-fetch" + __lib_extension()
 
 def __lib_arch_part():
-  if "arm64" in platform.platform():
+  p = platform.platform()
+
+  if "arm64" in p or "aarch64" in p:
     return "arm64"
 
   is_64 = sys.maxsize > 2**32
