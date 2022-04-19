@@ -6,7 +6,9 @@ Compatible with Python 2 and 3.
 
 # v2
 
-Now that [EnvKey v2](https://v2.envkey.com) has been released, you can find version 2 of this package in [a subdirectory of the EnvKey v2 monorepo](https://github.com/envkey/envkey/tree/main/public/sdks/languages-and-frameworks/python). Using v2 requires an EnvKey v2 organization (it won't work with ENVKEYs generated in a v1 org).
+Now that [EnvKey v2](https://v2.envkey.com) has been released, [you can find version 2 of this package here.](https://github.com/envkey/envkey/tree/main/public/sdks/languages-and-frameworks/python)
+
+Using v2 requires an EnvKey v2 organization (it won't work with ENVKEYs generated in a v1 org).
 
 [Here's a guide on migrating from v1 to v2.](https://docs-v2.envkey.com/docs/migrating-from-v1)
 
